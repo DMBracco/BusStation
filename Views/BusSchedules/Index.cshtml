@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BusStation.Data.Entities.BusSchedule>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-action="Index" method="get" class="row g-3">
+    <div class="col-auto mt-auto">
+        <h3>Поиск:</h3>
+    </div>
+    <div class="col-auto">
+        <label class="control-label">Начало:</label>
+        <input class="form-control" type="time" name="DepartureTimeFilter" min="05:00" max="20:00" >
+    </div>
+    <div class="col-auto">
+        <label class="control-label">Конец:</label>
+        <input class="form-control" type="time" name="ArrivalTimeFilter" min="05:00" max="20:00" >
+    </div>
+    <div class="col-auto">
+        <label for="inputPassword2" class="control-label">Маршрут:</label>
+        <input class="form-control" type="number" name="RouteId" min="05:00" max="20:00" >
+    </div>
+    <div class="col-auto mt-auto">
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </div>
+    <div class="col-auto mt-auto">
+        <a asp-action="Index" class="btn btn-danger">Очистить поиск</a>
+    </div>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Buses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Routes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Platforms)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Buses.GosNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Routes.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Platforms.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

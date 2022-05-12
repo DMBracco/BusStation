@@ -1,0 +1,38 @@
+﻿@page
+@model UserConfirmation
+
+@{
+    ViewData["Title"] = "Все пользователи";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Подтвержден
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Users)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+            </td>
+            <td>
+                <a asp-page="./RegisterConfirmation" asp-route-email="@item.Email" asp-route-returnUrl="./UserConfirmation">Подтвердить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
